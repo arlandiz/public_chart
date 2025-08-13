@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Public Chart • Coinbase USD Markets</title>
+  <meta name="description" content="Public TradingView chart for Coinbase USD markets." />
+  <style>
+    :root { color-scheme: dark; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      background:#0e1116; color:#dbe4f3; font: 15px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      display:flex; flex-direction:column;
+    }
+    header, footer {
+      padding:10px 14px; border-bottom:1px solid #1a2231;
+    }
+    header { display:flex; gap:12px; align-items:center; }
+    header .dot { width:8px; height:8px; border-radius:50%; background:#22c55e; display:inline-block; }
+    main { flex:1; min-height: 0; }
+    .wrap { height: calc(100vh - 96px); } /* header+footer rough height */
+    a { color:#8ab4ff; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    footer { border-top:1px solid #1a2231; border-bottom:none; font-size:13px; display:flex; justify-content:space-between; align-items:center; }
+    .note { opacity:.8 }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="dot" title="Live"></span>
+    <strong>Public Chart</strong>
+    <span class="note">• Coinbase USD markets • Powered by TradingView</span>
+  </header>
+
+  <main>
+    <!-- TradingView Widget START -->
+    <div class="wrap">
+      <div class="tradingview-widget-container" style="height:100%;width:100%">
+        <div id="tv-chart" style="height:100%;width:100%"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script>
+          // Default symbol + full Coinbase USD watchlist (feel free to edit)
+          const DEFAULT_SYMBOL = "COINBASE:BTCUSD";
+          const WATCHLIST = [
+            "COINBASE:BTCUSD",
+            "COINBASE:ETHUSD",
+            "COINBASE:SOLUSD",
+            "COINBASE:DOGEUSD",
+            "COINBASE:SUIUSD",
+            "COINBASE:ORCAUSD"
+          ];
+          // Initialize the Advanced Real-Time Chart
+          new TradingView.widget({
+            symbol: DEFAULT_SYMBOL,
+            autosize: true,
+            interval: "60",                 // default timeframe (60 = 1h)
+            timezone: "Etc/UTC",
+            theme: "dark",
+            style: "1",
+            locale: "en",
+            enable_publishing: false,
+            allow_symbol_change: true,
+            watchlist: WATCHLIST,
+            hide_side_toolbar: false,
+            withdateranges: true,
+            studies: [],                    // add built-ins if you want (e.g., "MACD@tv-basicstudies")
+            container_id: "tv-chart"
+          });
+        </script>
+      </div>
+    </div>
+    <!-- TradingView Widget END -->
+    <noscript>Please enable JavaScript to view the TradingView chart.</noscript>
+  </main>
+
+  <footer>
+    <span>Public view only — no account data displayed.</span>
+    <span><a href="https://chart.arlandiz.com" target="_blank" rel="noopener">chart.arlandiz.com</a></span>
+  </footer>
+</body>
+</html>
